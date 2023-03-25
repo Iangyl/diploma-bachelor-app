@@ -17,12 +17,12 @@
     "paths": {
       "@/src/*": ["./src/*"],
       "@/scripts/*": ["./scripts/*"],
-      "@/src/components/*": ["./src/components/*"],
-      "@/src/styles/*": ["./src/styles/*"],
-      "@/src/pages/*": ["./src/pages/*"],
-      "@/src/hooks/*": ["./src/hooks/*"],
-      "@/src/modules/*": ["./src/modules/*"],
-      "@/src/assets/*": ["./src/assets/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/styles/*": ["./src/styles/*"],
+      "@/pages/*": ["./src/pages/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/modules/*": ["./src/modules/*"],
+      "@/assets/*": ["./src/assets/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
