@@ -1,4 +1,7 @@
 import Head from 'next/head';
+import styles from '@/styles/Home.module.sass';
+import Link from 'next/link';
+import Search from '../components/Search/Search';
 
 export default function Home() {
   return (
@@ -12,7 +15,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
-      <main>Hello world!</main>
+      <main className={styles.main}>
+        <div>
+          <h1 className={styles.title}>Повнотекстовий пошук</h1>
+          <div>
+            <Search />
+          </div>
+        </div>
+      </main>
     </>
   );
 }

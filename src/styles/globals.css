@@ -1,14 +1,21 @@
 @font-face {
-  font-family: Arsenica, serif;
-  src: url('../assets/fonts/Arsenica/ArsenicaTrial-Regular.ttf');
+  font-family: Arsenica;
+  src: url('../../public/fonts/Arsenica/ArsenicaTrial-Regular.ttf');
+  font-weight: 400;
 }
 
 @font-face {
   font-family: 'TT Norms', sans-serif;
-  src: url('../assets/fonts/TT_Norms/TTNorms-Regular.otf');
+  src: url('../../public/fonts/TT_Norms/TTNorms-Regular.otf');
+  font-weight: 400;
 }
 
 :root {
   --font-main: Arsenica, serif;
   --font-secondary: 'TT Norms', sans-serif;
+
+  /* colors */
+  --gray-col-1: #d9d9d9;
+
+  --black-col-1: #010101;
 }

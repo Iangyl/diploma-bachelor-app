@@ -1,0 +1,25 @@
+@mixin flex-full-center
+  display: flex
+  align-items: center
+  justify-content: center
+
+@mixin flex-vert-center
+  display: flex
+  align-items: center
+
+@mixin flex-hor-center
+  display: flex
+  justify-content: center
+
+@mixin flex-full-center-with-gap($gap)
+  @include flex-full-center
+  gap: $gap
+
+@mixin flex-vert-center-with-gap($gap)
+  @include flex-vert-center
+  gap: $gap
+
+@mixin flex-hor-center-with-gap($gap)
+  @include flex-hor-center
+  gap: $gap
+  
