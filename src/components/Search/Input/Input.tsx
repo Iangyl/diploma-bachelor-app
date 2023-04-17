@@ -8,6 +8,7 @@ const Input = ({ value, onChange, className, style }: ITextInput) => (
     style={style}
     value={value}
     onChange={onChange}
+    placeholder='Введіть текст'
   />
 );
 

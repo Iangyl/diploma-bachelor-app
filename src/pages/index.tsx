@@ -1,9 +1,38 @@
+import { ChangeEvent, useEffect, useState } from 'react';
+import { useModal } from '../components/ModalProvider/ModalProvider';
+
+import getFile from '../utils/getFile';
+import findFile from '../utils/findFile';
+import prepareText from '../utils/prepareText';
+
 import Head from 'next/head';
-import styles from '@/styles/Home.module.sass';
-import Link from 'next/link';
 import Search from '../components/Search/Search';
 
+import styles from '@/styles/Home.module.sass';
+
 export default function Home() {
+  const [search, setSearch] = useState('');
+  const [fileName, setFileName] = useState<string>();
+  const { openModal } = useModal();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSubmit = () => {
+    const preparedText = prepareText(search);
+    const searchedWords = preparedText.split('');
+    const fileName = findFile(searchedWords, search);
+    setFileName(fileName);
+  };
+
+  useEffect(() => {
+    if (fileName) {
+      const text = getFile(fileName);
+      openModal({ type: 'modal', content: text });
+    }
+  }, [fileName]);
+
   return (
     <>
       <Head>
@@ -16,10 +45,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" type="image/x-icon" />
       </Head>
       <main className={styles.main}>
-        <div>
+        <div className={styles.wrapper}>
           <h1 className={styles.title}>Повнотекстовий пошук</h1>
           <div>
-            <Search />
+            <Search
+              value={search}
+              onChange={handleChange}
+              onSubmit={handleSubmit}
+            />
           </div>
         </div>
       </main>
