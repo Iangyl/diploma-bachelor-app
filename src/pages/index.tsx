@@ -1,13 +1,13 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import axios from 'axios';
 import { useModal } from '../components/ModalProvider/ModalProvider';
 
 import Head from 'next/head';
 import Search from '../components/Search/Search';
 
-import styles from '@/styles/Home.module.sass';
-import axios from 'axios';
 import IResSearch from '../interfaces/IResSearch';
-import { Data } from './api/search';
+
+import styles from '@/styles/Home.module.sass';
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -24,7 +24,7 @@ export default function Home() {
     axios
       .post('/api/search', { search })
       .then((data) => {
-        setDocument(data.data);
+        setDocument(data.data.data);
         setSearch('');
       })
       .catch((error) => console.log(error.error));

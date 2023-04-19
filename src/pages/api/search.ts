@@ -21,7 +21,6 @@ export default function handler(
   console.log('server');
   if (req.method === 'POST') {
     const searchedSubstring = req.body.search;
-    console.log('searchedSubstring', searchedSubstring);
     const preparedSearchedSubstring = prepareText(searchedSubstring);
     const searchedWords = preparedSearchedSubstring.split(' ');
     const fileName = findFile(searchedWords, searchedSubstring);

@@ -10,7 +10,6 @@ const Modal = ({
   content: string;
   onClose: () => void;
 }) => {
-  const text = 'some text';
   return (
     <div className={styles.modal}>
       <div className={styles.top}>
