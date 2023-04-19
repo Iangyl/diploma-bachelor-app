@@ -1,10 +1,10 @@
-const makeKMPTable = function (word) {
-  if (Object.prototype.toString.call(word) == '[object String]') {
+const makeKMPTable = function (word: string | string[]) {
+  if (typeof word === 'string') {
     word = word.split('');
   }
-  let results = [];
-  let pos = 2;
-  let cnd = 0;
+  let results: number[] = [];
+  let pos: number = 2;
+  let cnd: number = 0;
 
   results[0] = -1;
   results[1] = 0;
@@ -23,18 +23,15 @@ const makeKMPTable = function (word) {
   return results;
 };
 
-const KMPSearch = function (string, word) {
-  if (Object.prototype.toString.call(string) == '[object String]') {
-    string = string.split('');
-  }
-  if (Object.prototype.toString.call(word) == '[object String]') {
+const KMPSearch = function (string: string, word: string | string[]): number {
+  if (typeof word === 'string') {
     word = word.split('');
   }
 
-  let index = -1;
-  let m = 0;
-  let i = 0;
-  let T = makeKMPTable(word);
+  let index: number = -1;
+  let m: number = 0;
+  let i: number = 0;
+  let T: number[] = makeKMPTable(word);
 
   while (m + i < string.length) {
     if (word[i] == string[m + i]) {
@@ -54,4 +51,4 @@ const KMPSearch = function (string, word) {
   return index;
 };
 
-module.exports = KMPSearch
+export default KMPSearch;

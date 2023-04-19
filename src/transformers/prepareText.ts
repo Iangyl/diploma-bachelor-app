@@ -1,7 +1,4 @@
-import {
-  clearText,
-  toLowerCase,
-} from '../../scripts/createDictionary/createDictionary';
+import { clearText, toLowerCase } from '../utils/helpers';
 
 const prepareText = (value: string) => clearText(toLowerCase(value));
 

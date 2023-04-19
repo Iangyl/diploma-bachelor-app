@@ -1,37 +1,40 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useModal } from '../components/ModalProvider/ModalProvider';
 
-import getFile from '../utils/getFile';
-import findFile from '../utils/findFile';
-import prepareText from '../utils/prepareText';
-
 import Head from 'next/head';
 import Search from '../components/Search/Search';
 
 import styles from '@/styles/Home.module.sass';
+import axios from 'axios';
+import IResSearch from '../interfaces/IResSearch';
+import { Data } from './api/search';
 
 export default function Home() {
   const [search, setSearch] = useState('');
-  const [fileName, setFileName] = useState<string>();
+  const [document, setDocument] = useState<IResSearch>();
   const { openModal } = useModal();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const handleSubmit = () => {
-    const preparedText = prepareText(search);
-    const searchedWords = preparedText.split('');
-    const fileName = findFile(searchedWords, search);
-    setFileName(fileName);
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    axios
+      .post('/api/search', { search })
+      .then((data) => {
+        setDocument(data.data);
+        setSearch('');
+      })
+      .catch((error) => console.log(error.error));
   };
 
   useEffect(() => {
-    if (fileName) {
-      const text = getFile(fileName);
-      openModal({ type: 'modal', content: text });
+    if (document) {
+      openModal({ type: 'modal', content: document.content });
     }
-  }, [fileName]);
+  }, [document]);
 
   return (
     <>
