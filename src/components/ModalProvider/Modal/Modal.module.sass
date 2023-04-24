@@ -1,8 +1,15 @@
 .modal
+  --height: 800px
+  --background-col: white
+.loading
+  --height: 300px 
+  --background-col: white
+
+.modal
   position: relative
   max-width: 700px
   width: 100%
-  height: 900px
+  height: var(--height)
   padding: 15px 15px 15px 15px
   background: white
   .top
@@ -10,5 +17,7 @@
     align-items: center
     justify-content: flex-end
     margin-bottom: 20px
+    background-color: var(--background-col)
   .content
+    font-size: 1.3rem
     overflow-y: auto

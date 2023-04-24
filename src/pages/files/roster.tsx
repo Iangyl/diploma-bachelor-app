@@ -12,9 +12,11 @@ import Search from '@/src/components/Search/Search';
 import Roster from '@/src/components/Roster/Roster';
 
 import styles from '@/styles/pages-styles/Roster.module.sass';
+import { useModal } from '@/src/components/ModalProvider/ModalProvider';
 
 export default function RosterPage() {
   const router = useRouter();
+  const { openModal } = useModal();
   const dispatch = useAppDispatch();
   const search = useAppSelector((state) => state.search.search);
   const files = useAppSelector((state) => state.files.allFiles);
@@ -31,7 +33,7 @@ export default function RosterPage() {
       .then((data) => {
         dispatch(setAllFiles(data.data.data));
       })
-      .catch((error) => console.log(error.error));
+      .catch((error) => openModal({ type: 'error', content: error.response.data.error }));
   };
 
   return (

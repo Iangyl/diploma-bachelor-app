@@ -33,7 +33,7 @@ export default function Home() {
         dispatch(setAllFiles(data.data.data));
         router.push(APP_ROUTES.ROSTER);
       })
-      .catch((error) => console.log(error.error));
+      .catch((error) => openModal({ type: 'error', content: error.response.data.error }));
   };
 
   return (
