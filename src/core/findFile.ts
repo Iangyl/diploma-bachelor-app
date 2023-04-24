@@ -9,7 +9,7 @@ const findFile = (wordsArray: string[], substring: string) => {
   let wordsInfo: Record<string, string[]> = {};
   let filesCounter: Record<string, number> = {};
   let filesArray: string[] = [];
-  let result: string;
+  let result: string[] = [];
 
   const filesList: Record<string, string | number>[] = [];
 
@@ -47,8 +47,7 @@ const findFile = (wordsArray: string[], substring: string) => {
     const idx = KMPSearch(text, substring);
 
     if (idx >= 0) {
-      result = name;
-      return
+      result.push(name);
     }
   });
 

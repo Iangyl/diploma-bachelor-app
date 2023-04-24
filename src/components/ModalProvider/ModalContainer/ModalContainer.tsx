@@ -1,12 +1,18 @@
+import { useRef, useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from '../Modal/Modal';
+import ModalError from '../ModalError/ModalError';
 
 import { IModalContainer } from './ModalContainer.types';
 
 import styles from './ModalContainer.module.sass';
-import { useRef, useState, useEffect } from 'react';
 
-const ModalContainer = ({ isOpen, content, onClose }: IModalContainer) => {
+const ModalContainer = ({
+  type,
+  isOpen,
+  content,
+  onClose,
+}: IModalContainer) => {
   const ref = useRef<Element | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -22,7 +28,12 @@ const ModalContainer = ({ isOpen, content, onClose }: IModalContainer) => {
             isOpen ? styles.open : styles.close
           }`}
         >
-          {isOpen && <Modal onClose={onClose} content={content} />}
+          {isOpen &&
+            (type === 'error' ? (
+              <ModalError onClose={onClose} content={content} />
+            ) : (
+              <Modal type={type} onClose={onClose} content={content} />
+            ))}
         </div>,
         document.body
       )

@@ -1,18 +1,14 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next';
 import prepareText from '@/src/transformers/prepareText';
 import findFile from '@/src/core/findFile';
-import getFile from '@/src/utils/getFile';
-import { DIRECTORY_WITH_DOCS } from '@/src/utils/constants';
 import IResSearch from '@/src/interfaces/IResSearch';
+import fileNamesToFileInfo from '@/src/transformers/fileNamesToFileInfo';
 
 export type Data = {
   success: boolean;
-  data?: IResSearch;
+  data?: IResSearch[];
   error?: string;
 };
-
-// move all calculation to next project instead of using Express
 
 export default function handler(
   req: NextApiRequest,
@@ -23,16 +19,14 @@ export default function handler(
     const searchedSubstring = req.body.search;
     const preparedSearchedSubstring = prepareText(searchedSubstring);
     const searchedWords = preparedSearchedSubstring.split(' ');
-    const fileName = findFile(searchedWords, searchedSubstring);
+    const fileNames = findFile(searchedWords, searchedSubstring);
+    const fileInfos = fileNamesToFileInfo(fileNames);
 
-    if (fileName) {
+    if (fileNames && fileNames.length > 0) {
       res.statusCode = 200;
       res.send({
         success: true,
-        data: {
-          fileName: fileName,
-          content: getFile(DIRECTORY_WITH_DOCS, fileName),
-        },
+        data: fileInfos,
       });
     } else {
       res.statusCode = 404;
