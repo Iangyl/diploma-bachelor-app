@@ -1,21 +1,27 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent } from 'react';
+import { useRouter } from 'next/router';
+
 import axios from 'axios';
+
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { useModal } from '../components/ModalProvider/ModalProvider';
+import { setAllFiles } from '../redux/filesSlice/filesSlice';
+import { setSearch } from '../redux/searchSlice/searchSlice';
+import { APP_ROUTES } from '../utils/constants';
 
 import Head from 'next/head';
 import Search from '../components/Search/Search';
 
-import IResSearch from '../interfaces/IResSearch';
-
-import styles from '@/styles/Home.module.sass';
+import styles from '@/styles/pages-styles/Home.module.sass';
 
 export default function Home() {
-  const [search, setSearch] = useState('');
-  const [document, setDocument] = useState<IResSearch>();
-  const { openModal } = useModal();
+  const router = useRouter();
+  const { openModal } = useModal(); // add error window into modal component
+  const dispatch = useAppDispatch();
+  const search = useAppSelector((state) => state.search.search);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
+    dispatch(setSearch(e.target.value));
   };
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -24,17 +30,11 @@ export default function Home() {
     axios
       .post('/api/search', { search })
       .then((data) => {
-        setDocument(data.data.data);
-        setSearch('');
+        dispatch(setAllFiles(data.data.data));
+        router.push(APP_ROUTES.ROSTER);
       })
       .catch((error) => console.log(error.error));
   };
-
-  useEffect(() => {
-    if (document) {
-      openModal({ type: 'modal', content: document.content });
-    }
-  }, [document]);
 
   return (
     <>
