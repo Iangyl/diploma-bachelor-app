@@ -30,7 +30,7 @@ const Roster = ({ files }: { files: IResSearch[] }) => {
           <li>No files found!</li>
         )}
       </ul>
-      <div>
+      <div className={styles.paginationContainer}>
         <Pagination
           page={page}
           pageSize={pageSize}

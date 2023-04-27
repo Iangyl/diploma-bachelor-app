@@ -1,10 +1,10 @@
 import usePagination from '@/src/hooks/usePagination';
+import { DOTS } from '@/src/utils/constants';
+import PaginationItem from './PaginationItem/PaginationItem';
 
 import { IPagination } from './Pagination.types';
 
 import styles from './Pagination.module.sass';
-import PaginationItem from './PaginationItem/PaginationItem';
-import { DOTS } from '@/src/utils/constants';
 
 const Pagination = ({
   page,
@@ -35,9 +35,15 @@ const Pagination = ({
   };
 
   let lastPage = paginationRange![paginationRange!.length - 1];
+
   return (
-    <ul className={`${styles.pagination} {className}`}>
-      <PaginationItem type="leftArrow" onClick={onPrevious} />
+    <ul className={`${styles.pagination} ${className}`}>
+      <PaginationItem
+        type="leftArrow"
+        onClick={onPrevious}
+        disabled={page === 1 ? true : false}
+        className={page === 1 ? styles.disabledCell : styles.enabledCell}
+      />
       {paginationRange?.map((pageNumber) => {
         if (pageNumber === DOTS) {
           return <PaginationItem type="cell" value="&#8230;" />;
@@ -48,10 +54,16 @@ const Pagination = ({
             type="cell"
             value={pageNumber}
             onClick={() => onPageChange(pageNumber)}
+            className={page === pageNumber ? styles.disabledCell : styles.enabledCell}
           />
         );
       })}
-      <PaginationItem type="rightArrow" onClick={onNext} />
+      <PaginationItem
+        type="rightArrow"
+        onClick={onNext}
+        disabled={page === lastPage ? true : false}
+        className={page === lastPage ? styles.disabledCell : styles.enabledCell}
+      />
     </ul>
   );
 };

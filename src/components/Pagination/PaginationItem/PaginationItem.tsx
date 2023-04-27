@@ -1,11 +1,23 @@
 import ArrowIcon from '@/src/assets/icons/Arrow';
 import Button from '../../Search/Button/Button';
-import { IPaginationItem } from './PaginationItem.types';
 
-const PaginationItem = ({ type, value, onClick }: IPaginationItem) => {
+import { IPaginationItem } from './PaginationItem.types';
+import styles from './PaginationItem.module.sass';
+
+const PaginationItem = ({
+  disabled,
+  type,
+  value,
+  onClick,
+  className
+}: IPaginationItem) => {
   return (
     <li>
-      <Button onClick={onClick}>
+      <Button
+        onClick={onClick}
+        className={`${styles.paginationItem} ${className}`}
+        disabled={disabled ?? false}
+      >
         {type === 'cell' ? (
           value?.toString() ?? '#'
         ) : type === 'leftArrow' ? (
