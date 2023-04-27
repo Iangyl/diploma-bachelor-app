@@ -15,7 +15,7 @@ const Roster = ({ files }: { files: IResSearch[] }) => {
     const firstPageIndex = (page - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
     return files.slice(firstPageIndex, lastPageIndex);
-  }, [page]);
+  }, [page, files]);
 
   return (
     <>

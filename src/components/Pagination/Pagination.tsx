@@ -46,15 +46,20 @@ const Pagination = ({
       />
       {paginationRange?.map((pageNumber) => {
         if (pageNumber === DOTS) {
-          return <PaginationItem type="cell" value="&#8230;" />;
+          return (
+            <PaginationItem key={pageNumber} type="cell" value="&#8230;" />
+          );
         }
 
         return (
           <PaginationItem
+            key={pageNumber}
             type="cell"
             value={pageNumber}
             onClick={() => onPageChange(pageNumber)}
-            className={page === pageNumber ? styles.disabledCell : styles.enabledCell}
+            className={
+              page === pageNumber ? styles.disabledCell : styles.enabledCell
+            }
           />
         );
       })}
