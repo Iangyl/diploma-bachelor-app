@@ -14,23 +14,27 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log('server');
   if (req.method === 'POST') {
-    const searchedSubstring = req.body.search;
-    const preparedSearchedSubstring = prepareText(searchedSubstring);
-    const searchedWords = preparedSearchedSubstring.split(' ');
-    const fileNames = findFile(searchedWords, searchedSubstring);
-    const fileInfos = fileNamesToFileInfo(fileNames);
-
-    if (fileNames && fileNames.length > 0) {
-      res.statusCode = 200;
-      res.send({
-        success: true,
-        data: fileInfos,
-      });
-    } else {
-      res.statusCode = 404;
-      res.send({ success: false, error: 'No such substring in any file' });
+    try {
+      const searchedSubstring = req.body.search;
+      const preparedSearchedSubstring = prepareText(searchedSubstring);
+      const searchedWords = preparedSearchedSubstring.split(' ');
+      const fileNames = findFile(searchedWords, searchedSubstring);
+      const fileInfos = fileNamesToFileInfo(fileNames);
+  
+      if (fileNames && fileNames.length > 0) {
+        res.statusCode = 200;
+        res.send({
+          success: true,
+          data: fileInfos,
+        });
+      } else {
+        res.statusCode = 404;
+        res.send({ success: false, error: 'No such substring in any file' });
+      }
+    } catch {
+      res.statusCode = 500;
+      res.send({ success: false, error: 'Something went wrong!' });
     }
   }
 }
