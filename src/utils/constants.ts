@@ -5,3 +5,5 @@ export enum APP_ROUTES {
   HOME = '/',
   ROSTER = '/files/roster',
 }
+
+export const DOTS = -1;
