@@ -13,7 +13,7 @@ const RosterItem = ({
 }) => {
   const { openModal } = useModal();
   return (
-    <div>
+    <div className={styles.linkContainer}>
       <a className={styles.link} onClick={() => openModal({ type: 'modal', content })}>
         <h3>{fileName}</h3>
         <p className={styles.content}>{textCutter(content)}</p>
