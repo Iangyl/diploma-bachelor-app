@@ -18,7 +18,9 @@ const findFile = (wordsArray: string[], substring: string) => {
   );
 
   wordsArray.forEach((word: string) => {
-    wordsInfo = { ...wordsInfo, [word]: dictionary[word] };
+    if (dictionary[word]) {
+      wordsInfo = { ...wordsInfo, [word]: dictionary[word] };
+    }
   });
 
   Object.keys(wordsInfo).forEach((key: string) => {
@@ -51,7 +53,7 @@ const findFile = (wordsArray: string[], substring: string) => {
     }
   });
 
-  return result!;
+  return result;
 };
 
 export default findFile;

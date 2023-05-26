@@ -18,7 +18,7 @@ const ModalError = ({
             <CloseIcon width={18} height={18} onClick={onClose} color="#FFFFFF" />
           </Button>
         </div>
-        <h2 className={styles.errorTitle}>Error</h2>
+        <h2 className={styles.errorTitle}>Помилка</h2>
       </div>
       <div className={styles.content}>{content}</div>
     </div>

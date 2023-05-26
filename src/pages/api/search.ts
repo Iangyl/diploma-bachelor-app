@@ -21,7 +21,7 @@ export default function handler(
       const searchedWords = preparedSearchedSubstring.split(' ');
       const fileNames = findFile(searchedWords, searchedSubstring);
       const fileInfos = fileNamesToFileInfo(fileNames);
-  
+
       if (fileNames && fileNames.length > 0) {
         res.statusCode = 200;
         res.send({
@@ -30,11 +30,11 @@ export default function handler(
         });
       } else {
         res.statusCode = 404;
-        res.send({ success: false, error: 'No such substring in any file' });
+        res.send({ success: false, error: 'Вказаного підрядка не знайдено в жодному файлі!' });
       }
     } catch {
       res.statusCode = 500;
-      res.send({ success: false, error: 'Something went wrong!' });
+      res.send({ success: false, error: 'Упс! Щось пішло не так...' });
     }
   }
 }
