@@ -14,7 +14,7 @@ const Roster = ({ files }: { files: IResSearch[] }) => {
   const currentRosterData = useMemo(() => {
     const firstPageIndex = (page - 1) * pageSize;
     const lastPageIndex = firstPageIndex + pageSize;
-    return files.slice(firstPageIndex, lastPageIndex);
+    return files?.slice(firstPageIndex, lastPageIndex);
   }, [page, files]);
 
   return (
@@ -34,7 +34,7 @@ const Roster = ({ files }: { files: IResSearch[] }) => {
         <Pagination
           page={page}
           pageSize={pageSize}
-          total={files.length}
+          total={files?.length ?? 0}
           onPageChange={setPage}
         />
       </div>
