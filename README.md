@@ -2,4 +2,4 @@
 
 Автор: Барибін Володимир.
 Пошта (робоча): vohanchib.dev@gmail.com
-Пошта (навчальна): vohanchib@knu.ua
+Пошта (навчальна): ipzm231_bvr@student.ztu.edu.ua
